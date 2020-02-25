@@ -8,7 +8,7 @@ class Stickly {
       mainContainer: '.sticky-menu-container',
       menuContainer: '.sticky-menu',
       linkContainer: '.sticky-menu-link',
-      waypointContainer: '.is-waypoint',
+      waypointContainer: '.sticky-waypoint',
       classFixed: 'is-sticky',
       classAbs: 'is-abs',
       classLinkActive: 'is-active',

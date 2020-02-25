@@ -1,7 +1,7 @@
 {
   "name": "stickly",
   "version": "0.0.1",
-  "description": "A JavaScript library for building interactive sticky navigation with active link state and muc more.",
+  "description": "A JavaScript library for building interactive sticky navigation with active link state, scroll spy and much more.",
   "main": "./src/index.js",
   "scripts": {
     "test": "jest",
