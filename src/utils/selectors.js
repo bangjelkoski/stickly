@@ -2,7 +2,7 @@ export function $(selector, scope = document) {
   return scope.querySelector(selector);
 }
 
-export function $(selector, scope = document) {
+export function $id(selector, scope = document) {
   return scope.getElementById(selector);
 }
 

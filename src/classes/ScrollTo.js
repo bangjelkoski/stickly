@@ -1,6 +1,10 @@
-import { $id, isLinkToCurrentPage } from './../utils';
+import {
+  getDomNodeFromHash,
+  updateHistory,
+  isLinkToCurrentPage
+} from '../utils';
 
-class PrettyScrollTo {
+class ScrollTo {
   constructor({ links, ...options }) {
     const config = {
       scrollClass: 'is-scrolling',
@@ -23,12 +27,13 @@ class PrettyScrollTo {
     });
   }
 
+  // eslint-disable-next-line consistent-return
   onClick(event) {
     const link = event.currentTarget;
 
     if (isLinkToCurrentPage(link)) {
       event.preventDefault();
-      this.updateHistory(link.hash);
+      updateHistory(link.hash);
 
       if (link.hash) {
         return this.scrollToTarget(link);
@@ -36,19 +41,8 @@ class PrettyScrollTo {
     }
   }
 
-  getDomNodeFromHash(hash) {
-    const decodedHash = decodeURIComponent(hash);
-    const id = decodedHash && decodedHash.slice(1);
-
-    return $id(id);
-  }
-
-  updateHistory(hash) {
-    window.history.replaceState({}, document.title, hash);
-  }
-
   scrollToTarget(link) {
-    const target = this.getDomNodeFromHash(link.hash);
+    const target = getDomNodeFromHash(link.hash);
 
     if (target) {
       const rect = target.getBoundingClientRect();
@@ -74,14 +68,18 @@ class PrettyScrollTo {
     const container = this.getScrollContainer();
     container.classList.add(this.options.scrollClass);
 
-    return new Promise((resolve, reject) =>
-      resolve(
-        window.scrollTo({
-          behavior: 'smooth',
-          left: 0,
-          top: offsetTop
-        })
-      )
+    return new Promise(
+      // eslint-disable-next-line no-unused-vars
+      (resolve, reject) =>
+        // eslint-disable-next-line implicit-arrow-linebreak
+        resolve(
+          window.scrollTo({
+            behavior: 'smooth',
+            left: 0,
+            top: offsetTop
+          })
+        )
+      // eslint-disable-next-line function-paren-newline
     );
   }
 
@@ -95,4 +93,4 @@ class PrettyScrollTo {
   }
 }
 
-export default PrettyScrollTo;
+export default ScrollTo;

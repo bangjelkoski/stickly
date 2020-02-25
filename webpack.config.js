@@ -6,7 +6,10 @@ module.exports = {
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    library: 'Stickly',
+    libraryExport: 'default',
+    libraryTarget: 'umd'
   },
   devServer: {
     publicPath: '/',
@@ -31,7 +34,7 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['babel-preset-env']
+            presets: ['@babel/env']
           }
         }
       }

@@ -1,17 +1,16 @@
-import { throttle } from 'lodash';
-import { $, $$ } from './../utils';
-import ScrollTo from './scroll';
+import { $, $$, throttle } from '../utils';
+import ScrollTo from './ScrollTo';
 
 class Stickly {
   constructor(options) {
     const config = {
-      mainContainer: '.sticky-menu-container',
-      menuContainer: '.sticky-menu',
-      linkContainer: '.sticky-menu-link',
-      waypointContainer: '.sticky-waypoint',
-      classFixed: 'is-sticky',
-      classAbs: 'is-abs',
-      classLinkActive: 'is-active',
+      mainContainer: '[data-stickly-container]',
+      menuContainer: '[data-stickly-menu]',
+      linkContainer: '[data-stickly-menu-link]',
+      waypointContainer: '[data-stickly-waypoint]',
+      classFixed: 'is-stickly',
+      classAbs: 'is-stickly-abs',
+      classLinkActive: 'is-stickly-active',
       scrollLinkClass: 'is-scrolling',
       pageTopMargin: 0,
       scrollOffset: 0
@@ -40,7 +39,7 @@ class Stickly {
 
   init() {
     const { links, menu, waypoints } = this;
-    const { container, scrollOffset } = this.options;
+    const { scrollOffset } = this.options;
 
     const domElementsExist = menu && links.length > 0 && waypoints.length > 0;
 
@@ -56,7 +55,6 @@ class Stickly {
       });
 
       if (this.doesMenuFit()) {
-        container.classList.add('is-sticky-init');
         this.bindSticky();
         this.bindWaypoints();
       }
@@ -67,7 +65,7 @@ class Stickly {
     const { links } = this;
     const { classLinkActive } = this.options;
 
-    links.forEach((element) => element.classList.remove(classLinkActive));
+    links.forEach((elm) => elm.classList.remove(classLinkActive));
 
     if (element) {
       element.classList.add(classLinkActive);
@@ -111,6 +109,7 @@ class Stickly {
     return containerHeight + menuTop - menuHeight;
   }
 
+  // eslint-disable-next-line consistent-return
   updateStickyNav() {
     const { menu } = this;
     const { classFixed, classAbs } = this.options;
