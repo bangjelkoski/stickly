@@ -1,0 +1,14 @@
+[data-stickly-menu-container] {
+  position: relative;
+}
+
+[data-stickly-menu-container][data-stickly-menu].is-stickly {
+  position: fixed;
+  top: 0;
+}
+
+[data-stickly-menu-container][data-stickly-menu].is-stickly-abs {
+  position: absolute;
+  bottom: 0;
+  top: auto;
+}

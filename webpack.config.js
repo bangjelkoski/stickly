@@ -29,6 +29,22 @@ module.exports = {
         }
       },
       {
+        enforce: 'pre',
+        test: /\.css$/,
+        exclude: /(node_modules)/,
+        use: {
+          loader: 'style-loader'
+        }
+      },
+      {
+        enforce: 'pre',
+        test: /\.css$/,
+        exclude: /(node_modules)/,
+        use: {
+          loader: 'css-loader'
+        }
+      },
+      {
         test: /\.js$/,
         exclude: /(node_modules)/,
         use: {

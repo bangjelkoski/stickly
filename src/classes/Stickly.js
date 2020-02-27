@@ -61,9 +61,10 @@ class Stickly {
     }
   }
 
-  updateActiveLink(element) {
+  updateActiveLink(targetId) {
     const { links } = this;
-    const { classLinkActive } = this.options;
+    const { container, classLinkActive } = this.options;
+    const element = $(`a[href="#${targetId}"]`, container);
 
     links.forEach((elm) => elm.classList.remove(classLinkActive));
 
@@ -141,21 +142,21 @@ class Stickly {
   }
 
   bindWaypoints() {
-    const { container } = this.options;
     const intersectionObserverIsEnabled = 'IntersectionObserver' in window;
 
     if (intersectionObserverIsEnabled) {
       const handler = (entries) => {
-        entries.forEach((entry) => {
+        // eslint-disable-next-line no-restricted-syntax
+        for (const entry of entries) {
           if (entry.isIntersecting) {
-            const activeLink = $(`a[href="#${entry.target.id}"]`, container);
-            this.updateActiveLink(activeLink);
+            this.updateActiveLink(entry.target.id);
+            break;
           }
-        });
+        }
       };
 
       const observer = new IntersectionObserver(handler, {
-        threshold: 0.4
+        threshold: 0.8
       });
 
       this.waypoints.forEach((waypoint) => observer.observe(waypoint));
